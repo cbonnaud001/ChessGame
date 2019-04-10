@@ -26,7 +26,6 @@ class Knight extends Piece
 
     for (let i = 0 ; i < availableCases.length ; i++)
     {
-      console.log(((availableCases[i].x == x) && (availableCases[i].y == y)))
       if ((availableCases[i].x == x) && (availableCases[i].y == y))
       {
         if (board.pieceAt(x,y))

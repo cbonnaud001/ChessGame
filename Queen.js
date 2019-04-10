@@ -67,15 +67,19 @@ class Queen extends Piece
         ((this.matrixPosition.x - i) >= 0) && ((this.matrixPosition.y - i) >= 0)) //diag haut gauche
         caseAvailable.push({x:this.matrixPosition.x - i, y:this.matrixPosition.y - i});
     }
-    console.table(caseAvailable)
     for (let i = 0 ; i < caseAvailable.length ; i++)
     {
       if ((caseAvailable[i].x == x) && (caseAvailable[i].y == y))
       {
-        if (board.pieceAt(x,y))
-          return !(board.getPiece(x,y).isWhite == this.isWhite);
+        if (this.passingThroughDiagAux(x,y,board))
+          return false;
         else
-          return true;
+        {
+          if (board.pieceAt(x,y))
+            return !(board.getPiece(x,y).isWhite == this.isWhite);
+          else
+            return true;
+        }
       }
     }
     return false;

@@ -223,10 +223,74 @@ class Piece {
   else
     return false;
 }
-  /*
-  if (this.matrixPosition.x == x)
+
+
+passingThroughDiagAux(x,y,board)
+{
+  if (this.matrixPosition.x > x)
   {
-    if (this.matrixPosition.x > x)
-      console.log("movingXCross down")
-  }*/
+    if (this.matrixPosition.y > y)
+      return this.passingThroughDiag(x,y,'TL',board);
+    else
+      return this.passingThroughDiag(x,y,'DL',board);
+  }
+  else
+  {
+    if (this.matrixPosition.y > y)
+      return this.passingThroughDiag(x,y,'TR',board);
+    else
+      return this.passingThroughDiag(x,y,'DR',board);
+  }
+}
+
+passingThroughDiag(x,y,dir,board)
+{
+  let dist = abs(x - this.matrixPosition.x);
+  switch (dir)
+  {
+    case 'DR':
+    for (let i = 1 ; i < dist ; i++)
+    {
+      if (board.pieceAt(this.matrixPosition.x + i, this.matrixPosition.y + i))
+      {
+        return true;
+      }
+    }
+    return false;
+    break;
+    case 'DL':
+    for (let i = 1 ; i < dist ; i++)
+    {
+      if (board.pieceAt(this.matrixPosition.x - i, this.matrixPosition.y + i))
+      {
+        return true;
+      }
+    }
+    return false;
+    break;
+    case 'TR':
+    for (let i = 1 ; i < dist ; i++)
+    {
+      if (board.pieceAt(this.matrixPosition.x + i, this.matrixPosition.y - i))
+      {
+        return true;
+      }
+    }
+    return false;
+    break;
+    case 'TL':
+    for (let i = 1 ; i < dist ; i++)
+    {
+      if (board.pieceAt(this.matrixPosition.x - i, this.matrixPosition.y - i))
+      {
+        return true;
+      }
+    }
+    return false;
+    break;
+  }
+}
+
+
+
 }
